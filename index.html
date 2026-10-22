@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reporte de Conflictos Sociales 2004–2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: escenario 16:9 de 1600×900 escalado a la ventana; diapositivas apiladas, una activa; navegación inferior fija. Diseño de una sola apariencia (oscura/institucional) por decisión. */
+:root{
+  --ink:#08132B; --ink-2:#0F2148; --ink-3:#173063;
+  --paper:#F6F7FA; --paper-2:#E7EAF1;
+  --red:#D2122E; --red-soft:#FF5A72; --gold:#F2B33D; --sky:#86B6FF; --green:#3DB97A;
+  --mute:#A9B6D1; --mute-dark:#4B5A78;
+  --display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --text:'Public Sans',Arial,Helvetica,sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:var(--text);overflow:hidden;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
+*{box-sizing:border-box}
+.viewport{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden}
+.stage{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0}
+.slide{position:absolute;inset:0;padding:72px 96px 64px;display:flex;flex-direction:column;gap:28px;
+  opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .55s ease,transform .55s ease,visibility 0s linear .55s;overflow:hidden;border-radius:6px}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .55s ease}
+.slide.prev{transform:translateX(-40px)}
+.dark{background:var(--ink);color:var(--paper)}
+.navy{background:radial-gradient(1200px 700px at 85% 10%,#16336E 0%,var(--ink) 60%);color:var(--paper)}
+.light{background:var(--paper);color:var(--ink)}
+.light2{background:var(--paper-2);color:var(--ink)}
+.redbg{background:linear-gradient(135deg,#A60C24 0%,var(--red) 70%);color:#FFF4F2}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.dark .eyebrow,.navy .eyebrow{color:var(--gold)}
+.redbg .eyebrow{color:#FFD9A0}
+h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance}
+h1{font-size:132px;font-weight:800;line-height:.92;text-transform:uppercase;letter-spacing:-.005em}
+h2{font-size:64px;font-weight:800;line-height:1.02}
+h3{font-size:30px;font-weight:700;line-height:1.1}
+p{margin:0}
+.lead{font-size:26px;line-height:1.45;max-width:1000px}
+.dark .lead,.navy .lead{color:var(--mute)}
+.light .lead,.light2 .lead{color:var(--mute-dark)}
+.foot{position:absolute;left:96px;right:96px;bottom:26px;font-size:15px;color:var(--mute);display:flex;justify-content:space-between}
+.light .foot,.light2 .foot{color:#6A7690}
+.row{display:flex;gap:28px}
+.grow{flex:1;min-width:0}
+.num{font-family:var(--display);font-weight:800;line-height:.95;font-variant-numeric:tabular-nums}
+img{max-width:100%;display:block}
+.shot{border-radius:10px;box-shadow:0 28px 70px rgba(0,0,0,.45);background:#fff}
+.light .shot,.light2 .shot{box-shadow:0 18px 44px rgba(8,19,43,.18)}
+.pill{display:inline-block;font-size:18px;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid currentColor;opacity:.9}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,.tl-btn:focus-visible,.hs:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* HERO */
+.hero-stack{position:absolute;right:70px;top:150px;width:700px;height:560px}
+.hero-stack img{position:absolute;width:420px;border-radius:6px;box-shadow:0 30px 70px rgba(0,0,0,.55);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.hero-stack .h1i{left:0;top:40px;transform:rotate(-9deg)}
+.hero-stack .h2i{left:110px;top:20px;transform:rotate(-4deg)}
+.hero-stack .h3i{left:220px;top:10px;transform:rotate(1deg)}
+.hero-stack .h4i{left:330px;top:0;transform:rotate(5deg)}
+.hero-stack .h5i{left:120px;top:250px;width:600px;transform:rotate(-2deg);border-radius:10px}
+.slide.active .hero-stack .h5i{animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:rotate(-2deg) translateY(-10px)}}
+.redbar{position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--red)}
+
+/* contadores */
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.stat{border-top:6px solid var(--red);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.stat .num{font-size:120px}
+.stat p{font-size:22px;color:var(--mute-dark)}
+
+/* línea de tiempo */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.tl-btn{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:18px 18px 16px;border-radius:10px;background:#fff;border:1px solid #D6DBE6;border-top:6px solid var(--c);transition:transform .25s,box-shadow .25s}
+.tl-btn:hover{transform:translateY(-3px)}
+.tl-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);box-shadow:0 18px 40px rgba(8,19,43,.28)}
+.tl-btn .num{font-size:56px;color:var(--c)}
+.tl-btn span{font-size:18px}
+.tl-detail{flex:1;display:grid;grid-template-columns:600px 1fr;gap:56px;align-items:center;min-height:0}
+.tl-pages{position:relative;height:430px}
+.tl-pages img{position:absolute;height:420px;width:auto;border:1px solid #CBD2DF;border-radius:4px;box-shadow:0 18px 40px rgba(8,19,43,.2);transition:opacity .35s,transform .45s}
+.tl-pages .pa{left:0;top:6px;transform:rotate(-3deg)}
+.tl-pages .pb{left:250px;top:0;transform:rotate(2.5deg)}
+.tl-text{display:flex;flex-direction:column;gap:18px}
+.tl-text h2{font-size:56px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-size:18px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid #CBD2DF}
+.fade-swap{animation:swap .45s ease}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}}
+
+/* antes/después */
+.ba{position:relative;width:1000px;height:640px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45);background:#fff;touch-action:none;user-select:none}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.ba .after{clip-path:inset(0 0 0 50%)}
+.ba .handle{position:absolute;top:0;bottom:0;left:50%;width:4px;background:var(--gold);transform:translateX(-2px)}
+.ba .knob{position:absolute;top:50%;left:50%;width:58px;height:58px;border-radius:50%;background:var(--gold);color:var(--ink);transform:translate(-50%,-50%);display:grid;place-items:center;font-weight:800;font-size:20px;box-shadow:0 8px 20px rgba(0,0,0,.35);border:none}
+.ba .lab{position:absolute;top:16px;font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:6px;background:rgba(8,19,43,.85);color:#fff}
+.ba .l1{left:16px}.ba .l2{right:16px;background:var(--red)}
+
+/* hotspots */
+.hs-wrap{position:relative;width:860px;flex:none}
+.hs{position:absolute;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--ink);border:none;font-weight:800;font-size:20px;transform:translate(-50%,-50%);box-shadow:0 0 0 0 rgba(242,179,61,.6);animation:pulse 2.2s infinite}
+.hs[aria-pressed="true"]{background:var(--red);color:#fff;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 18px rgba(242,179,61,0)}100%{box-shadow:0 0 0 0 rgba(242,179,61,0)}}
+.hs-panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hs-item{padding:18px 20px;border-radius:10px;border-left:5px solid var(--ink-3);background:rgba(255,255,255,.04);transition:background .25s,border-color .25s}
+.hs-item.on{background:rgba(242,179,61,.12);border-left-color:var(--gold)}
+.hs-item h3{font-size:26px}
+.hs-item p{font-size:19px;line-height:1.4;color:var(--mute);margin-top:4px}
+
+/* tabla comparativa */
+.cmp{width:100%;border-collapse:collapse;font-size:23px}
+.cmp th{font-family:var(--display);font-size:24px;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:14px 18px;background:var(--ink);color:var(--paper)}
+.cmp th:last-child{color:var(--red-soft)}
+.cmp td{padding:14px 18px;border-bottom:1px solid #D6DBE6;vertical-align:top}
+.cmp td:nth-child(2){color:#5A6884}
+.cmp td:last-child{font-weight:700}
+.cmp tr{transition:opacity .4s,transform .4s}
+.slide:not(.active) .cmp tbody tr{opacity:0;transform:translateX(-12px)}
+
+/* mapas toggle */
+.seg{display:inline-flex;background:var(--ink-2);border-radius:999px;padding:5px;gap:4px}
+.seg button{border:none;background:transparent;color:var(--mute);font-size:19px;font-weight:600;padding:10px 20px;border-radius:999px}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--ink)}
+.map-view{position:relative;flex:1;min-height:0}
+.map-view img{position:absolute;left:0;top:0;height:100%;width:auto;max-width:none;transition:opacity .4s}
+
+/* tarjetas */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:#fff;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:8px;border-top:7px solid var(--c)}
+.card .num{font-size:104px;color:var(--c)}
+.card p{font-size:20px;line-height:1.4;color:var(--mute-dark)}
+.cards6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tile{background:var(--ink-2);border-radius:14px;padding:26px 30px;display:flex;flex-direction:column;gap:6px}
+.tile .num{font-size:88px}
+.tile p{font-size:21px;color:var(--mute)}
+
+/* hoja de ruta */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;flex:1;min-height:0}
+.lane{display:flex;flex-direction:column;gap:14px;min-width:0}
+.lane-h{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid var(--c);padding-bottom:8px}
+.lane-h h3{font-size:27px;color:var(--c)}
+.lane-h span{font-size:17px;color:var(--mute)}
+.rcard{background:var(--ink-2);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;border:1px solid #20386E}
+.rcard h4{margin:0;font-size:22px;font-family:var(--text);font-weight:700}
+.rcard p{font-size:18px;line-height:1.45;color:var(--mute)}
+.tag{align-self:flex-start;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--c)}
+
+/* maquetas */
+.mock{background:#fff;border-radius:14px;border:1px solid #D6DBE6;box-shadow:0 18px 44px rgba(8,19,43,.14);overflow:hidden;display:flex;flex-direction:column}
+.mock-h{background:var(--ink);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.mock-h small{font-family:var(--text);font-size:14px;letter-spacing:0;text-transform:none;color:var(--gold);font-weight:600}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px}
+.ph{aspect-ratio:4/3;border-radius:8px;background:repeating-linear-gradient(135deg,#E9EDF5 0 14px,#F3F5FA 14px 28px);border:1px dashed #AFBAD0;display:flex;align-items:flex-end;padding:10px;font-size:15px;color:#4B5A78;font-weight:600;max-width:100%}
+.news{display:flex;flex-direction:column}
+.news a,.news div.item{display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:center;padding:13px 16px;border-bottom:1px solid #E3E7EF;font-size:18px;color:var(--ink);text-decoration:none}
+.src{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:6px;text-align:center}
+.s-web{background:#E6EEFF;color:#1C3E8A}.s-x{background:#ECEFF4;color:#20293A}.s-fb{background:#E4ECFB;color:#1F4FA3}.s-ig{background:#FCE7EF;color:#A0124B}
+.rec{width:100%;border-collapse:collapse;font-size:16px}
+.rec th{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#4B5A78;text-align:left;padding:11px 12px;border-bottom:2px solid var(--ink)}
+.rec td{padding:11px 12px;border-bottom:1px solid #E3E7EF;vertical-align:top}
+.st{font-size:14px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.st-ok{background:#DDF5E8;color:#166A3F}.st-pr{background:#FFF1D6;color:#8A5A00}.st-no{background:#FDE2E6;color:#A10F27}
+.ejemplo{font-size:15px;color:#6A7690;font-style:italic}
+
+/* propuestas */
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.filters button{border:1px solid #BCC6D8;background:#fff;color:var(--ink);font-size:16px;font-weight:600;padding:9px 16px;border-radius:999px}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ideas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;flex:1;min-height:0;align-content:start}
+.idea{background:#fff;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;border:1px solid #D6DBE6;transition:opacity .3s,transform .3s}
+.idea.dim{opacity:.18;transform:scale(.97)}
+.idea h4{margin:0;font-size:21px;line-height:1.2}
+.idea p{font-size:16.5px;line-height:1.45;color:#4B5A78}
+.idea .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.idea .meta span{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--paper-2);color:#33415E}
+
+/* controles */
+.bar{position:fixed;left:0;right:0;bottom:0;height:calc(56px + env(safe-area-inset-bottom,0px));padding:0 max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:12px;background:rgba(8,19,43,.92);backdrop-filter:blur(8px);z-index:5;border-top:1px solid #1B2F5C}
+.bar button{background:transparent;border:1px solid #2B4374;color:var(--paper);height:38px;min-width:38px;border-radius:8px;font-size:15px;padding:0 12px}
+.bar button:hover{background:#13285A}
+.prog{flex:1;height:4px;background:#1B2F5C;border-radius:2px;overflow:hidden;min-width:40px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .4s}
+.count{font-variant-numeric:tabular-nums;font-size:14px;color:var(--mute);min-width:56px;text-align:center}
+.secname{font-size:14px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30vw}
+.overview{position:fixed;inset:0;z-index:8;background:rgba(5,11,26,.96);padding:40px max(24px,env(safe-area-inset-right,0px)) 40px max(24px,env(safe-area-inset-left,0px));overflow:auto}
+.overview h3{color:var(--paper);margin-bottom:20px;font-size:28px}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ov-grid button{text-align:left;background:var(--ink-2);border:1px solid #20386E;color:var(--paper);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;min-height:92px}
+.ov-grid button b{font-family:var(--display);font-size:22px;color:var(--gold)}
+.ov-grid button span{font-size:14px;color:var(--mute);line-height:1.35}
+.ov-grid button.cur{border-color:var(--gold)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head><body>
+<div class="viewport" id="viewport">
+<div class="stage" id="stage">
+
+<!-- 1 PORTADA -->
+<section class="slide navy active" data-title="Portada">
+  <div class="redbar"></div>
+  <p class="eyebrow">Defensoría del Pueblo · Adjuntía para la Prevención de Conflictos Sociales y la Gobernabilidad</p>
+  <h1 style="margin-top:56px;max-width:800px;font-size:116px">El reporte que <span style="color:var(--red-soft)">cambió de era</span></h1>
+  <p class="lead" style="max-width:740px">Veintidós años del Reporte de Conflictos Sociales: del listado de 2004 al reporte interactivo N.° 271, y lo que viene.</p>
+  <div class="row" style="margin-top:auto;align-items:center">
+    <span class="pill" style="color:var(--gold);font-size:22px">2004 → 2026</span>
+    <span style="font-size:20px;color:var(--mute)">Use ← → o deslice para avanzar</span>
+  </div>
+  <div class="hero-stack" aria-hidden="true">
+    <img class="h1i" src="img/p01a-01.jpg" alt="">
+    <img class="h2i" src="img/p71-01.jpg" alt="">
+    <img class="h3i" src="img/p131-001.jpg" alt="">
+    <img class="h4i" src="img/p262-001.jpg" alt="">
+    <img class="h5i" src="img/n_cover.jpg" alt="">
+  </div>
+</section>
+
+<!-- 2 ORIGEN -->
+<section class="slide light" data-title="Un instrumento de Estado" style="justify-content:center;gap:40px">
+  <p class="eyebrow">Un instrumento de Estado</p>
+  <h2 style="font-size:84px;max-width:1350px">Cada mes, desde 2004, la Defensoría del Pueblo informa al país dónde está la conflictividad social y qué se hace frente a ella.</h2>
+  <div class="stats3" style="margin-top:40px">
+    <div class="stat"><span class="num" data-count="271">271</span><p>ediciones mensuales publicadas</p></div>
+    <div class="stat" style="border-color:var(--ink)"><span class="num" data-count="22">22</span><p>años de registro continuo</p></div>
+    <div class="stat" style="border-color:var(--gold)"><span class="num" data-count="59">59</span><p>oficinas y módulos defensoriales que lo alimentan</p></div>
+  </div>
+  <div class="foot"><span>Reporte de Conflictos Sociales · Evolución 2004–2026</span><span>32 oficinas defensoriales y 27 módulos de atención</span></div>
+</section>
+
+<!-- 3 LÍNEA DE TIEMPO -->
+<section class="slide light2" data-title="Línea de tiempo">
+  <div class="row" style="justify-content:space-between;align-items:end">
+    <div><p class="eyebrow">Línea de tiempo</p><h2>Cinco ediciones, cinco momentos</h2></div>
+    <p style="font-size:18px;color:#5A6884">Seleccione un año</p>
+  </div>
+  <div class="tl" role="group" aria-label="Ediciones del reporte">
+    <button class="tl-btn" style="--c:#8E99AE" data-i="0" aria-pressed="true"><span class="num">2004</span><b>N.° 01</b><span>11 páginas · 47 casos</span></button>
+    <button class="tl-btn" style="--c:#6E81A6" data-i="1" aria-pressed="false"><span class="num">2010</span><b>N.° 71</b><span>73 páginas · 260 conflictos</span></button>
+    <button class="tl-btn" style="--c:#43609A" data-i="2" aria-pressed="false"><span class="num">2015</span><b>N.° 131</b><span>121 páginas · 210 conflictos</span></button>
+    <button class="tl-btn" style="--c:#24407A" data-i="3" aria-pressed="false"><span class="num">2025</span><b>N.° 262</b><span>120 páginas · 204 conflictos</span></button>
+    <button class="tl-btn" style="--c:#D2122E" data-i="4" aria-pressed="false"><span class="num">2026</span><b>N.° 271</b><span>69 páginas interactivas · 193</span></button>
+  </div>
+  <div class="tl-detail" id="tlDetail">
+    <div class="tl-pages"><img class="pa" id="tlA" src="img/p01a-01.jpg" alt="Primera página del Reporte N.° 01"><img class="pb" id="tlB" src="img/p01b-02.jpg" alt="Listado de casos del Reporte N.° 01"></div>
+    <div class="tl-text" id="tlText">
+      <p class="eyebrow">2004 · Reporte N.° 01</p>
+      <h2>Un listado de 47 casos</h2>
+      <p class="lead">Conflictos entre la población y sus autoridades municipales y regionales, ordenados por departamento. Cada caso tenía cuatro datos: autoridad, población, motivo y fecha.</p>
+      <div class="chips"><span class="chip">11 páginas</span><span class="chip">Sin gráficos ni mapas</span><span class="chip">Sin tipología</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Fuente: reportes N.° 01 (2004), 71 (enero 2010), 131 (enero 2015), 262 (diciembre 2025) y 271 (setiembre 2026)</span><span></span></div>
+</section>
+
+<!-- 4 ANTES / DESPUÉS -->
+<section class="slide dark" data-title="Antes y después">
+  <div class="row" style="justify-content:space-between;align-items:end">
+    <div><p class="eyebrow">Antes y después</p><h2>El mismo mes de trabajo, otra forma de leerlo</h2></div>
+    <p style="font-size:18px;color:var(--mute)">Arrastre el control</p>
+  </div>
+  <div class="ba" id="ba">
+    <img src="img/p262-001.jpg" alt="Portada del Reporte N.° 262, formato PDF vertical">
+    <img class="after" id="baAfter" src="img/n_cover.jpg" alt="Portada del Reporte N.° 271, formato interactivo">
+    <span class="lab l1">N.° 262 · PDF</span><span class="lab l2">N.° 271 · interactivo</span>
+    <div class="handle" id="baHandle"></div>
+    <button class="knob" id="baKnob" aria-label="Deslizar para comparar">⟷</button>
+  </div>
+  <div class="foot"><span>Reporte N.° 262 (diciembre 2025) y Reporte N.° 271 (setiembre 2026)</span><span></span></div>
+</section>
+
+<!-- 5 SALTO -->
+<section class="slide redbg" data-title="El gran salto" style="justify-content:center">
+  <p class="eyebrow">2026 · Reporte N.° 271</p>
+  <h1 style="font-size:118px;max-width:1350px">El reporte deja de ser un documento. Ahora es una herramienta.</h1>
+  <p class="lead" style="color:#FFE3DE;max-width:1150px;font-size:30px">Se consulta en pantalla, se busca, se filtra por región, se explora en mapas y se descarga en PDF con un clic.</p>
+</section>
+
+<!-- 6 PORTADA CON PUNTOS -->
+<section class="slide navy" data-title="Una portada que informa">
+  <p class="eyebrow">El reporte N.° 271</p>
+  <h2>Una portada que ya informa</h2>
+  <div class="row" style="flex:1;min-height:0;align-items:center;gap:48px">
+    <div class="hs-wrap">
+      <img class="shot" src="img/n_cover.jpg" alt="Portada interactiva del Reporte N.° 271">
+      <button class="hs" style="left:22%;top:55%" data-h="0" aria-pressed="true" aria-label="Mapa de calor">1</button>
+      <button class="hs" style="left:70%;top:52%" data-h="1" aria-pressed="false" aria-label="El mes en una mirada">2</button>
+      <button class="hs" style="left:72%;top:84%" data-h="2" aria-pressed="false" aria-label="Indicadores clave">3</button>
+      <button class="hs" style="left:21%;top:24%" data-h="3" aria-pressed="false" aria-label="Directiva">4</button>
+    </div>
+    <div class="hs-panel grow">
+      <div class="hs-item on"><h3>1 · Mapa de calor</h3><p>Al pasar el cursor, cada departamento muestra sus conflictos activos y latentes.</p></div>
+      <div class="hs-item"><h3>2 · El mes en una mirada</h3><p>Diálogo, casos nuevos, resueltos, retirados, protestas y concentración territorial.</p></div>
+      <div class="hs-item"><h3>3 · Indicadores clave</h3><p>193 conflictos, 144 activos, 49 latentes y 257 actuaciones defensoriales.</p></div>
+      <div class="hs-item"><h3>4 · Marco de la Directiva</h3><p>Con esta edición se inicia la aplicación de la Directiva N.° 0001-2026-DP/PAD.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 COMPARATIVO -->
+<section class="slide light" data-title="Lo que cambia">
+  <p class="eyebrow">Antes y ahora</p>
+  <h2>Lo que cambia para quien lo consulta</h2>
+  <table class="cmp">
+    <thead><tr><th style="width:22%">Aspecto</th><th style="width:34%">PDF (hasta 2025)</th><th>Interactivo (2026)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Formato</b></td><td>PDF vertical de 120 páginas</td><td>Web, 69 páginas horizontales</td></tr>
+      <tr style="transition-delay:.06s"><td><b>Navegación</b></td><td>Índice con números de página</td><td>Menú con 27 destinos</td></tr>
+      <tr style="transition-delay:.12s"><td><b>Búsqueda</b></td><td>Recorrer el documento</td><td>Buscador y filtro por región</td></tr>
+      <tr style="transition-delay:.18s"><td><b>Mapas</b></td><td>Imágenes estáticas</td><td>5 mapas interactivos</td></tr>
+      <tr style="transition-delay:.24s"><td><b>Casos</b></td><td>Tablas de texto corrido</td><td>77 fichas que se amplían</td></tr>
+      <tr style="transition-delay:.30s"><td><b>Datos abiertos</b></td><td>No disponibles</td><td>Bases enlazadas con QR</td></tr>
+      <tr style="transition-delay:.36s"><td><b>Impresión</b></td><td>El mismo PDF</td><td>Exportación a PDF A4</td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Comparación entre el Reporte N.° 262 y el Reporte N.° 271</span><span></span></div>
+</section>
+
+<!-- 8 MAPAS -->
+<section class="slide dark" data-title="Mapas interactivos">
+  <div class="row" style="justify-content:space-between;align-items:end">
+    <div><p class="eyebrow">Territorio</p><h2>El país se explora en mapas</h2></div>
+    <div class="seg" role="group" aria-label="Mapa a mostrar">
+      <button data-m="0" aria-pressed="true">Distribución</button>
+      <button data-m="1" aria-pressed="false">Alertas</button>
+      <button data-m="2" aria-pressed="false">Acuerdos</button>
+    </div>
+  </div>
+  <div class="row" style="flex:1;min-height:0;gap:40px">
+    <div class="map-view" style="flex:0 0 900px">
+      <img class="shot" data-mi="0" src="img/n_map.jpg" alt="Mapa dinámico de distribución por departamento">
+      <img class="shot" data-mi="1" src="img/n_alertas.jpg" alt="Semáforo de alertas por nivel de riesgo" style="opacity:0">
+      <img class="shot" data-mi="2" src="img/n_acuerdos.jpg" alt="Mapa de seguimiento de cumplimiento de acuerdos" style="opacity:0">
+    </div>
+    <div class="grow" style="display:flex;flex-direction:column;gap:18px;justify-content:center" id="mapText">
+      <h3 style="font-size:40px;color:var(--gold)">Distribución territorial</h3>
+      <p class="lead" style="font-size:24px">Total, activos o latentes por departamento. Al hacer clic en uno, la tabla y los indicadores se actualizan.</p>
+    </div>
+  </div>
+  <div class="foot"><span>El reporte tiene 5 mapas interactivos: portada, distribución, alertas, mediaciones y acuerdos</span><span></span></div>
+</section>
+
+<!-- 9 FICHAS -->
+<section class="slide light" data-title="Fichas y búsqueda">
+  <p class="eyebrow">Casos</p>
+  <h2>Cualquier caso, en segundos</h2>
+  <img class="shot" src="img/n_top.jpg" alt="Barra de herramientas: secciones, buscador, filtro por región, contador y PDF A4" style="width:100%;height:auto">
+  <div class="row" style="align-items:flex-start">
+    <img class="shot" src="img/n_ficha.jpg" alt="Ficha ejecutiva de un conflicto" style="width:900px;height:auto">
+    <div class="grow" style="display:flex;flex-direction:column;gap:16px;font-size:23px">
+      <p><b>Buscador</b> por nombre o código</p>
+      <p><b>Filtro por región</b> con contador en vivo</p>
+      <p><b>Ampliar ficha</b> para leerla completa</p>
+      <p><b>Guía lateral</b> con la región de cada ficha</p>
+    </div>
+  </div>
+  <div class="foot"><span>77 fichas ejecutivas: caso, actores, fase, diálogo, actuaciones y hechos del mes</span><span></span></div>
+</section>
+
+<!-- 10 UNIDADES -->
+<section class="slide light2" data-title="La acción defensorial" style="justify-content:center;gap:36px">
+  <p class="eyebrow">Prevenir, mediar, cumplir</p>
+  <h2>La acción defensorial, visible en cada página</h2>
+  <div class="cards4" style="margin-top:24px">
+    <div class="card" style="--c:#D2122E"><span class="num" data-count="63">63</span><h3>Alertas</h3><p>clasificadas por riesgo y por departamento</p></div>
+    <div class="card" style="--c:#24407A"><span class="num" data-count="12">12</span><h3>Mediaciones</h3><p>en 8 departamentos, con su avance del mes</p></div>
+    <div class="card" style="--c:#1E7A4C"><span class="num" data-count="24">24</span><h3>Acuerdos</h3><p>casos con actas en seguimiento en 15 regiones</p></div>
+    <div class="card" style="--c:#B9781E"><span class="num" data-count="51">51</span><h3>Coordinación</h3><p>espacios interinstitucionales en las 26 regiones</p></div>
+  </div>
+  <p class="lead">Las tres unidades funcionales de la Adjuntía y los espacios de coordinación tienen su propio capítulo, con mapas y cifras del mes.</p>
+  <div class="foot"><span>Cifras de setiembre 2026 · Reporte N.° 271</span><span></span></div>
+</section>
+
+<!-- 11 TRANSPARENCIA -->
+<section class="slide dark" data-title="Transparencia">
+  <p class="eyebrow">Transparencia</p>
+  <h2>Datos abiertos y demandas identificadas</h2>
+  <div class="row" style="flex:1;min-height:0">
+    <div class="grow" style="display:flex;flex-direction:column;gap:16px"><img class="shot" src="img/n_acp.jpg" alt="Acciones colectivas de protesta con base abierta y QR"><p style="font-size:21px;color:var(--mute)"><b style="color:var(--paper)">151 protestas</b> en una base abierta enlazada con QR, además del repositorio de acuerdos.</p></div>
+    <div class="grow" style="display:flex;flex-direction:column;gap:16px"><img class="shot" src="img/n_nuevos.jpg" alt="Casos nuevos con sus demandas y derechos"><p style="font-size:21px;color:var(--mute)"><b style="color:var(--paper)">19 demandas</b> de los casos nuevos, con tema, entidad competente y derechos involucrados.</p></div>
+  </div>
+</section>
+
+<!-- 12 DIRECTIVA -->
+<section class="slide light" data-title="Marco técnico">
+  <div class="row" style="flex:1;align-items:center;gap:56px">
+    <div class="grow" style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Marco técnico</p>
+      <h2>Alineado a la nueva Directiva de gestión de conflictos</h2>
+      <p class="lead">Directiva N.° 0001-2026-DP/PAD: estados, cambios de estado en el registro, fases, actores, competencia por nivel de gobierno y 11 tipos de conflicto.</p>
+      <p class="lead">El marco metodológico, el institucional y el glosario pasan a tres anexos: el cuerpo del reporte va directo a los datos.</p>
+    </div>
+    <img class="shot" src="img/n_anexo.jpg" alt="Anexo A: conceptos, estados, fases y cambios de estado" style="width:780px;height:auto">
+  </div>
+</section>
+
+<!-- 13 CIFRAS -->
+<section class="slide navy" data-title="El salto en cifras" style="justify-content:center;gap:32px">
+  <p class="eyebrow">El salto en cifras</p>
+  <h2>Menos páginas, más información, acceso inmediato</h2>
+  <div class="cards6" style="margin-top:24px">
+    <div class="tile"><span class="num" style="color:var(--red-soft)">120 → <span data-count="69">69</span></span><p>páginas, sin perder contenido</p></div>
+    <div class="tile"><span class="num" style="color:var(--gold)" data-count="5">5</span><p>mapas interactivos del país</p></div>
+    <div class="tile"><span class="num" style="color:var(--sky)" data-count="27">27</span><p>destinos en el menú de navegación</p></div>
+    <div class="tile"><span class="num" data-count="77">77</span><p>fichas con búsqueda y filtro</p></div>
+    <div class="tile"><span class="num" data-count="257">257</span><p>actuaciones defensoriales detalladas</p></div>
+    <div class="tile"><span class="num">1 clic</span><p>para descargarlo en PDF A4</p></div>
+  </div>
+  <div class="foot"><span>Reporte N.° 262 (120 páginas) frente al Reporte N.° 271 (69 páginas)</span><span></span></div>
+</section>
+
+<!-- 14 LO QUE VIENE -->
+<section class="slide redbg" data-title="Lo que viene" style="justify-content:center">
+  <p class="eyebrow">Hoja de ruta</p>
+  <h1 style="font-size:124px;max-width:1300px">De informar a recomendar</h1>
+  <p class="lead" style="color:#FFE3DE;max-width:1100px;font-size:30px">El reporte seguirá creciendo: más evidencia del trabajo en campo, recomendaciones a las entidades y toda la comunicación del mes en un solo lugar.</p>
+</section>
+
+<!-- 15 HOJA DE RUTA -->
+<section class="slide navy" data-title="Hoja de ruta">
+  <p class="eyebrow">Hoja de ruta</p>
+  <h2>Cuatro mejoras para el reporte</h2>
+  <div class="road">
+    <div class="lane" style="--c:var(--gold)">
+      <div class="lane-h"><h3>Próximo reporte</h3><span>N.° 272</span></div>
+      <div class="rcard"><span class="tag">Confirmado</span><h4>Galería de campo</h4><p>Fotos de los procesos de mediación y de los espacios de coordinación, con lugar, fecha y entidades.</p></div>
+      <div class="rcard"><h4>Qué muestra</h4><p>Que la Defensoría está en el territorio: reuniones, visitas, mesas y actas, junto a la ficha del caso al que corresponden.</p></div>
+      <div class="rcard"><h4>Cuidados</h4><p>Autorización de uso de cada foto, pie con lugar y fecha, y sin rostros de menores ni datos personales.</p></div>
+    </div>
+    <div class="lane" style="--c:var(--sky)">
+      <div class="lane-h"><h3>En preparación</h3><span>Comunicación</span></div>
+      <div class="rcard"><span class="tag">Planificado</span><h4>Sala de prensa del mes</h4><p>Enlaces a todas las notas de prensa de la web de la Defensoría y a las publicaciones en redes sociales del mes, por caso o por región.</p></div>
+      <div class="rcard"><h4>Qué muestra</h4><p>La voz pública de la institución sobre cada conflicto, conectada con los datos del reporte.</p></div>
+      <div class="rcard"><h4>Cómo se arma</h4><p>Un registro mensual de enlaces de la web y de las cuentas oficiales, con fecha, red y caso.</p></div>
+    </div>
+    <div class="lane" style="--c:var(--red-soft)">
+      <div class="lane-h"><h3>Siguiente etapa</h3><span>Incidencia</span></div>
+      <div class="rcard"><span class="tag">Planificado</span><h4>Recomendaciones</h4><p>Un capítulo de recomendaciones a las entidades competentes, con el seguimiento de su atención mes a mes.</p></div>
+      <div class="rcard"><h4>Qué muestra</h4><p>Qué propone la Defensoría para cada caso y quién debe actuar.</p></div>
+      <div class="rcard"><h4>Cómo se sigue</h4><p>Un estado por recomendación: atendida, en proceso o sin respuesta.</p></div>
+    </div>
+    <div class="lane" style="--c:var(--green)">
+      <div class="lane-h"><h3>Difusión</h3><span>Suscripción</span></div>
+      <div class="rcard"><span class="tag">Planificado</span><h4>Boletín por suscripción</h4><p>Previa inscripción, un aviso por correo cuando se publica el reporte, con el resumen del mes y el enlace.</p></div>
+      <div class="rcard"><h4>Qué muestra</h4><p>Las cifras clave, los casos nuevos y las alertas de riesgo alto, en un solo mensaje.</p></div>
+      <div class="rcard"><h4>Para quién</h4><p>Entidades del Estado, autoridades regionales y locales, academia, prensa y ciudadanía inscrita.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 MAQUETAS -->
+<section class="slide light2" data-title="Cómo se verá">
+  <div class="row" style="justify-content:space-between;align-items:end">
+    <div><p class="eyebrow">Cómo se verá</p><h2>Cuatro nuevas secciones</h2></div>
+    <p class="ejemplo">Maquetas ilustrativas: contenido de ejemplo</p>
+  </div>
+  <div class="row" style="flex:1;min-height:0;align-items:flex-start">
+    <div class="mock grow">
+      <div class="mock-h">Galería de campo <small>Mediación · ECI</small></div>
+      <div class="gal">
+        <div class="ph">Mediación · [lugar]</div><div class="ph">Mediación · [lugar]</div><div class="ph">ECI · [OD]</div>
+        <div class="ph">ECI · [OD]</div><div class="ph">Acta · [fecha]</div><div class="ph">Visita · [fecha]</div>
+      </div>
+    </div>
+    <div class="mock grow">
+      <div class="mock-h">Sala de prensa <small>Setiembre</small></div>
+      <div class="news">
+        <div class="item"><span class="src s-web">Web</span><span>Nota de prensa sobre [tema]</span></div>
+        <div class="item"><span class="src s-x">X</span><span>Publicación sobre [caso]</span></div>
+        <div class="item"><span class="src s-fb">Facebook</span><span>Publicación sobre [región]</span></div>
+        <div class="item"><span class="src s-ig">Instagram</span><span>Publicación sobre [tema]</span></div>
+        <div class="item"><span class="src s-web">Web</span><span>Nota de prensa sobre [tema]</span></div>
+      </div>
+    </div>
+    <div class="mock grow">
+      <div class="mock-h">Recomendaciones <small>Seguimiento</small></div>
+      <table class="rec">
+        <thead><tr><th>Entidad</th><th>Recomendación</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td>[Entidad]</td><td>[Recomendación]</td><td><span class="st st-ok">Atendida</span></td></tr>
+          <tr><td>[Entidad]</td><td>[Recomendación]</td><td><span class="st st-pr">En proceso</span></td></tr>
+          <tr><td>[Entidad]</td><td>[Recomendación]</td><td><span class="st st-no">Sin respuesta</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mock grow">
+      <div class="mock-h">Boletín <small>Suscripción</small></div>
+      <div style="padding:18px;display:flex;flex-direction:column;gap:12px">
+        <p style="font-size:16px;color:#33415E;line-height:1.4">Reciba el reporte cada mes en su correo.</p>
+        <div style="border:1px solid #BCC6D8;border-radius:8px;padding:11px 12px;font-size:16px;color:#7A869E">[correo@entidad.gob.pe]</div>
+        <div style="border:1px solid #BCC6D8;border-radius:8px;padding:11px 12px;font-size:16px;color:#7A869E">[Institución]</div>
+        <div style="background:var(--ink);color:#fff;border-radius:8px;padding:11px 12px;font-size:16px;font-weight:700;text-align:center">Inscribirme</div>
+        <div style="border-top:1px dashed #BCC6D8;padding-top:12px;display:flex;flex-direction:column;gap:6px">
+          <p style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1E7A4C">Correo de ejemplo</p>
+          <p style="font-size:16px;font-weight:700;color:var(--ink)">Reporte N.° [número] publicado</p>
+          <p style="font-size:15px;color:#4B5A78;line-height:1.4">[Conflictos del mes] · [casos nuevos] · [alertas de riesgo alto] · Ver reporte</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 18 CIERRE -->
+<section class="slide navy" data-title="Cierre" style="justify-content:center">
+  <div class="redbar"></div>
+  <p class="eyebrow">Reporte de Conflictos Sociales</p>
+  <h1 style="max-width:1300px">Información oportuna <span style="color:var(--red-soft)">para prevenir</span></h1>
+  <p class="lead" style="max-width:1050px;font-size:30px">Veintidós años después del primer listado, el reporte llega a quien decide en el momento en que lo necesita.</p>
+  <p style="font-size:20px;color:var(--mute);margin-top:30px">Defensoría del Pueblo · Adjuntía para la Prevención de Conflictos Sociales y la Gobernabilidad</p>
+</section>
+
+</div>
+</div>
+
+<nav class="bar" aria-label="Navegación de la presentación">
+  <button id="bPrev" aria-label="Anterior">←</button>
+  <button id="bNext" aria-label="Siguiente">→</button>
+  <span class="count" id="count">1 / 17</span>
+  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+  <span class="secname" id="secName">Portada</span>
+  <button id="bOv" aria-label="Ver todas las diapositivas">Índice</button>
+  <button id="bFs" aria-label="Pantalla completa">⛶</button>
+</nav>
+<div class="overview" id="overview" hidden>
+  <h3>Diapositivas</h3>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage'), vp=document.getElementById('viewport');
+  const slides=[...document.querySelectorAll('.slide')];
+  let cur=0;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const barEl=document.querySelector('.bar');
+  function fit(){
+    const W=document.documentElement.clientWidth||innerWidth;
+    const H=(document.documentElement.clientHeight||innerHeight)-(barEl?barEl.offsetHeight:56);
+    const pad=W<700?8:24;
+    const s=Math.min((W-pad*2)/1600,(H-pad*2)/900);
+    const x=(W-1600*s)/2, y=Math.max(pad,(H-900*s)/2);
+    stage.style.transform='translate('+x+'px,'+y+'px) scale('+s+')';
+  }
+  addEventListener('resize',fit); fit(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+
+  function countUp(root){
+    root.querySelectorAll('[data-count]').forEach(el=>{
+      const end=+el.dataset.count;
+      if(reduce){el.textContent=end;return}
+      const t0=performance.now(), dur=1100;
+      function step(t){const k=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-k,3);el.textContent=Math.round(end*e);if(k<1)requestAnimationFrame(step)}
+      el.textContent='0';requestAnimationFrame(step);
+    });
+  }
+  function go(i){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    if(i===cur && slides[i].classList.contains('active')) return;
+    slides.forEach((s,k)=>{s.classList.toggle('active',k===i);s.classList.toggle('prev',k<i)});
+    cur=i;
+    document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('progBar').style.width=((i)/(slides.length-1)*100)+'%';
+    document.getElementById('secName').textContent=slides[i].dataset.title||'';
+    countUp(slides[i]);
+    try{localStorage.setItem('rcs-deck-slide',String(i))}catch(e){}
+  }
+  document.getElementById('bPrev').onclick=()=>go(cur-1);
+  document.getElementById('bNext').onclick=()=>go(cur+1);
+  addEventListener('keydown',e=>{
+    if(e.target.closest&&e.target.closest('input,textarea'))return;
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+    else if(e.key==='Home')go(0); else if(e.key==='End')go(slides.length-1);
+    else if(e.key==='o'||e.key==='O')toggleOv();
+    else if(e.key==='Escape'&&!ov.hidden)toggleOv(false);
+  });
+  let sx=null;
+  vp.addEventListener('touchstart',e=>{if(e.target.closest('.ba'))return;sx=e.touches[0].clientX},{passive:true});
+  vp.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));sx=null});
+
+  // índice
+  const ov=document.getElementById('overview'), grid=document.getElementById('ovGrid');
+  slides.forEach((s,k)=>{const b=document.createElement('button');b.innerHTML='<b>'+(k+1)+'</b><span></span>';b.querySelector('span').textContent=s.dataset.title||'';b.onclick=()=>{toggleOv(false);go(k)};grid.appendChild(b)});
+  function toggleOv(force){const show=force===undefined?ov.hidden:force;ov.hidden=!show;if(show){[...grid.children].forEach((b,k)=>b.classList.toggle('cur',k===cur));grid.children[cur].focus()}}
+  document.getElementById('bOv').onclick=()=>toggleOv();
+  ov.addEventListener('click',e=>{if(e.target===ov)toggleOv(false)});
+  document.getElementById('bFs').onclick=()=>{const d=document.documentElement;try{if(!document.fullscreenElement){d.requestFullscreen&&d.requestFullscreen().catch(()=>{})}else{document.exitFullscreen().catch(()=>{})}}catch(e){}};
+
+  // línea de tiempo
+  const ED=[
+    {a:'img/p01a-01.jpg',b:'img/p01b-02.jpg',e:'2004 · Reporte N.° 01',t:'Un listado de 47 casos',d:'Conflictos entre la población y sus autoridades municipales y regionales, ordenados por departamento. Cada caso tenía cuatro datos: autoridad, población, motivo y fecha.',c:['11 páginas','Sin gráficos ni mapas','Sin tipología']},
+    {a:'img/p71-01.jpg',b:'img/p71-02.jpg',e:'2010 · Reporte N.° 71',t:'Llegan el mapa y la estadística',d:'260 conflictos clasificados en 10 tipos, con mapa por departamento, gráficos de tipología y de frecuencia mensual, y secciones de protestas, alertas tempranas y actuaciones.',c:['73 páginas','170 activos · 90 latentes','Mapa estático']},
+    {a:'img/p131-001.jpg',b:'img/p131m-012.jpg',e:'2015 · Reporte N.° 131',t:'El reporte explica cómo mira el conflicto',d:'Incorpora la información conceptual (fases, actores, estados y tipología) y un resumen en portada con remisiones a cada página.',c:['121 páginas','210 conflictos','19 cuadros · 12 gráficos']},
+    {a:'img/p262-001.jpg',b:'img/p262f-007.jpg',e:'2025 · Reporte N.° 262',t:'Más información, el mismo formato',d:'Suma el trabajo de las tres unidades funcionales: alertas, mediación y cumplimiento de acuerdos. Sigue siendo un PDF vertical de 120 páginas.',c:['120 páginas','204 conflictos','26 cuadros · 13 gráficos']},
+    {a:'img/n_cover.jpg',b:'img/n_map.jpg',e:'2026 · Reporte N.° 271',t:'Un reporte para consultar',d:'Reporte web en 69 páginas horizontales: mapas interactivos, buscador, filtro por región, fichas ampliables, datos abiertos y exportación a PDF A4.',c:['69 páginas','193 conflictos','5 mapas interactivos'],wide:true}
+  ];
+  const tlBtns=[...document.querySelectorAll('.tl-btn')], tlA=document.getElementById('tlA'), tlB=document.getElementById('tlB'), tlText=document.getElementById('tlText');
+  tlBtns.forEach(b=>b.onclick=()=>{
+    const d=ED[+b.dataset.i]; tlBtns.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    tlA.src=d.a; tlB.src=d.b; tlA.alt='Página del '+d.e; tlB.alt='Página interior del '+d.e;
+    tlA.style.height=tlB.style.height=d.wide?'300px':'';
+    tlB.style.top=d.wide?'130px':''; tlB.style.left=d.wide?'120px':'';
+    tlText.innerHTML='';
+    const ey=document.createElement('p');ey.className='eyebrow';ey.textContent=d.e;
+    const h=document.createElement('h2');h.textContent=d.t;
+    const p=document.createElement('p');p.className='lead';p.textContent=d.d;
+    const ch=document.createElement('div');ch.className='chips';d.c.forEach(x=>{const s=document.createElement('span');s.className='chip';s.textContent=x;ch.appendChild(s)});
+    tlText.append(ey,h,p,ch); tlText.classList.remove('fade-swap'); void tlText.offsetWidth; tlText.classList.add('fade-swap');
+  });
+
+  // antes / después
+  const ba=document.getElementById('ba'), after=document.getElementById('baAfter'), hd=document.getElementById('baHandle'), kn=document.getElementById('baKnob');
+  let pos=50, drag=false;
+  function setBA(p){pos=Math.max(0,Math.min(100,p));after.style.clipPath='inset(0 0 0 '+pos+'%)';hd.style.left=pos+'%';kn.style.left=pos+'%'}
+  function fromEv(e){const r=ba.getBoundingClientRect();return (e.clientX-r.left)/r.width*100}
+  ba.addEventListener('pointerdown',e=>{drag=true;ba.setPointerCapture(e.pointerId);setBA(fromEv(e))});
+  ba.addEventListener('pointermove',e=>{if(drag)setBA(fromEv(e))});
+  ba.addEventListener('pointerup',()=>drag=false);
+  kn.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.stopPropagation();e.preventDefault();setBA(pos+(e.key==='ArrowLeft'?-5:5))}});
+
+  // puntos de la portada
+  const hs=[...document.querySelectorAll('.hs')], items=[...document.querySelectorAll('.hs-item')];
+  hs.forEach(b=>b.onclick=()=>{const k=+b.dataset.h;hs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));items.forEach((it,j)=>it.classList.toggle('on',j===k))});
+
+  // mapas
+  const MT=[['Distribución territorial','Total, activos o latentes por departamento. Al hacer clic en uno, la tabla y los indicadores se actualizan.'],['Semáforo de alertas','Las 63 alertas del mes pintadas por riesgo alto, intermedio o bajo, con su detalle por departamento.'],['Seguimiento de acuerdos','24 casos con actas en seguimiento en 15 regiones, con el estado de cumplimiento de cada uno.']];
+  const mb=[...document.querySelectorAll('.seg button')], mi=[...document.querySelectorAll('[data-mi]')], mt=document.getElementById('mapText');
+  mb.forEach(b=>b.onclick=()=>{const k=+b.dataset.m;mb.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));mi.forEach((im,j)=>im.style.opacity=j===k?1:0);mt.children[0].textContent=MT[k][0];mt.children[1].textContent=MT[k][1]});
+
+  // propuestas
+  const fb=[...document.querySelectorAll('.filters button')], ideas=[...document.querySelectorAll('.idea')];
+  fb.forEach(b=>b.onclick=()=>{const f=b.dataset.f;fb.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));ideas.forEach(it=>it.classList.toggle('dim',f!=='all'&&it.dataset.k!==f))});
+
+  let start=0; try{const v=parseInt(localStorage.getItem('rcs-deck-slide'),10); if(v>=0&&v<slides.length)start=v}catch(e){}
+  slides[0].classList.remove('active'); go(start);
+})();
+</script>
+
+</body></html>
